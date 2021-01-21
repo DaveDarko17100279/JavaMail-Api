@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">JavaM</string>
+
+    <string name="subject">Asunto</string>
+    <string name="to">Para</string>
+    <string name="message">Mensaje</string>
+    <string name="send">Enviar</string>
+    <string name="sending_mail">Enviando Correo</string>
+    <string name="mail_sent">Correo Enviado</string>
+    <string name="email">Correo Electrónico</string>
+    <string name="password">Contraseña</string>
+    <string name="compose">Escribir Correo</string>
+    <string name="field_is_required">Campo es requerido</string>
+    <string name="warning_message">Se debe utilizar una cuenta de Google y esta debe tener Activado el acceso desde Apps menos seguras</string>
+    <string name="sender_data_title">Datos del remitente</string>
+</resources>
