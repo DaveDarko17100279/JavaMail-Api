@@ -1,10 +1,14 @@
 package com.example.javam;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
+import android.text.Html;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -95,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            progressDialog = ProgressDialog.show(MainActivity.this, "", getString(R.string.sending_mail), true);
+            progressDialog = ProgressDialog.show(MainActivity.this, "Por favor, Espere...", "Enviando Mensaje", true);
             progressDialog.setCancelable(false);
         }
 
@@ -108,14 +112,14 @@ public class MainActivity extends AppCompatActivity {
                 mimeMessage.setSubject(subject);
                 mimeMessage.setContent(message, "text/html; charset=utf-8");
                 Transport.send(mimeMessage);
+		return "Correo Enviado Correctamente";
             } catch (MessagingException e) {
                 e.printStackTrace();
-                return e.getMessage();
+                return "Error de Messaging";
             } catch (Exception e) {
                 e.printStackTrace();
-                return e.getMessage();
+                return "Error en la Aplicación";
             }
-            return null;
         }
 
         @Override
@@ -127,7 +131,30 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String result) {
             progressDialog.dismiss();
-            Toast.makeText(getApplicationContext(), result, Toast.LENGTH_LONG).show();
+            if(result.equals("Correo Enviado Correctamente")){
+                //When Success
+
+                //Inicialize alert Dialog
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                builder.setCancelable(false);
+                builder.setTitle(Html.fromHtml("<font color='#509324'>Success</font>"));
+                builder.setMessage("Mail send succesfully.");
+                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+
+                        //Clear all edit Text
+                        editTextTo.setText("");
+                        editTextMessage.setText("");
+                        editTextSubject.setText("");
+                    }
+                });
+
+                builder.show();
+            }else{
+                Toast.makeText(MainActivity.this, "Algo Salió mal", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 }
