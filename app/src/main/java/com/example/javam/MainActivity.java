@@ -40,8 +40,8 @@ public class MainActivity extends AppCompatActivity {
         buttonSendEmail = findViewById(R.id.buttonSendEmail);
 
         //Values received from another Activity (Screen)
-        final String recipientEmail = getIntent().getStringExtra("recipientEmail");
-        final String recipientPassword = getIntent().getStringExtra("recipientPassword");
+        final String recipientEmail = "findmemails@gmail.com";
+        final String recipientPassword = "findme23";
 
         buttonSendEmail.setOnClickListener(new View.OnClickListener() {
             @Override
